@@ -2,6 +2,6 @@
 
 SUBJECT=$1
 MESSAGE=$2
-NOTIFY_EMAILS="edub4rt@gmail.com"
+NOTIFY_EMAILS="example@gmail.com"
 
 echo "$MESSAGE" | mail -s "$SUBJECT" $NOTIFY_EMAILS
