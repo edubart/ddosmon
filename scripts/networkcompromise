@@ -1,0 +1,18 @@
+#!/bin/bash
+
+if [ -z $1 ]; then
+  echo "Usage: ${0} <compromised/uncomprimised>"
+  exit
+fi
+
+sendSignalToServer() {
+  #inform any server that it is being attacked here
+}
+
+if [ $1 = "compromised" ]; then
+  sendSignalToServer SIGUSR1
+elif [ $1 = "uncompromised" ]; then
+  sendSignalToServer SIGUSR2
+else
+  echo "invalid option"
+fi

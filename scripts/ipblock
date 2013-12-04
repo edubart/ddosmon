@@ -1,0 +1,49 @@
+#!/bin/bash
+# shutdowns an ip and notify servers
+# by bart :)
+
+# configurations
+MYSQL_HOST="localhost"
+MYSQL_PORT="3306"
+MYSQL_USER="root"
+MYSQL_PASSWORD=""
+MYSQL_DATABASE="login"
+WATCHEDIPS_XML="configs/*.xml"
+
+if [ -z $1 ] || [ -z $2 ]; then
+    echo "Usage: ${0} <block/unblock> <ip>"
+    exit
+fi
+
+IPSTR=$2
+IPSTR2=`echo ${IPSTR//./ } | awk '{ print $4" "$3" "$2" "$1}'`
+let IP="0x`printf '%02X' ${IPSTR2}; echo`"
+INTERFACE=`cat $WATCHEDIPS_XML | grep $IPSTR | sed 's/.*interface="\([^"]*\)".*/\1/'`
+MYSQL_COMMAND="mysql --host=${MYSQL_HOST} --port=${MYSQL_PORT} --user=${MYSQL_USER} --password=${MYSQL_PASSWORD} ${MYSQL_DATABASE}"
+
+if [ -z $INTERFACE ]; then
+    echo "Ip not found on watchedips.xml"
+    exit
+fi
+
+executeQuery() {
+    echo $1 | ${MYSQL_COMMAND}
+}
+
+blockip() {
+    executeQuery "INSERT INTO blocked_server_ips (ip) VALUES ('${1}')"
+    #ifconfig ${INTERFACE} ${IPSTR} down
+}
+
+unblockip() {
+    executeQuery "DELETE FROM blocked_server_ips WHERE ip='${1}'"
+    #ifconfig ${INTERFACE} ${IPSTR} up
+}
+
+if [ $1 = "block" ]; then
+    blockip `echo ${IP}`
+elif [ $1 = "unblock" ]; then
+    unblockip `echo ${IP}`
+else
+    echo "invalid option"
+fi

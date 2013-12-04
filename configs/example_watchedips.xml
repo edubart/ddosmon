@@ -1,0 +1,5 @@
+<?xml version="1.0"?>
+<watchedips>
+    <ip interface="eth0" ip="172.16.0.5"/>
+</watchedips>
+

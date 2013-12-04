@@ -1,0 +1,7 @@
+#!/bin/bash
+
+SUBJECT=$1
+MESSAGE=$2
+NOTIFY_EMAILS="edub4rt@gmail.com"
+
+echo "$MESSAGE" | mail -s "$SUBJECT" $NOTIFY_EMAILS

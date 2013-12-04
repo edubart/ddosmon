@@ -1,0 +1,11 @@
+CMakeLists.txt.user
+Makefile
+headers.h.gch
+CMakeFiles
+build
+qtcreator-build
+cmake_install.cmake
+CMakeCache.txt
+*.o
+ddosmon
+!.gitignore

@@ -1,0 +1,17 @@
+interface = "eth0"
+global_traffic_threshold = 900000
+global_packets_threshold = 30
+ip_traffic_threshold = 500000
+ip_packets_threshold = 125000
+notification_traffic_threshold = 20000
+notification_packets_threshold = 30
+ipblock_retry_ticks = 5*3600*1000
+notification_command = "./scripts/notificate \"%1%\" \"%2%\" &"
+onblockip_command = "./scripts/ipblock block %1% &"
+onunblockip_command = "./scripts/ipblock unblock %1% &"
+network_uncompromise_ticks = 30
+onnetwork_compromise_command = "./scripts/networkcompromise compromised &"
+onnetwork_uncompromise_command = "./scripts/networkcompromise uncompromised &"
+log="logs/example.log"
+watchedips="configs/example_watchedips.xml"
+notificationsubject="DDOS Monitor on server1 notification"
