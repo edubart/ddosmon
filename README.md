@@ -1,5 +1,7 @@
 ### DDOS Monitor
 
+![ScreenShot](https://raw.github.com/edubart/ddosmon/master/screenshot.png)
+
 Program that uses low level linux packet sniffing in incoming network traffic
 for monitoring possible network attacks and reacting to them by alerting and
 triggering user defined self defence mechanisms.
